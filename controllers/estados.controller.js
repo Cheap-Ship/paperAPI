@@ -9,9 +9,8 @@ exports.findAll =  (req, res) => {
             res.status(200).json(data); 
     })
     .catch(err => {
-        console.log(err.message)
         res.status(500).json({
-            message: `Erro a obter Estados.`
+            message: `Erro a obter Estados: ${err.message}`
         });
     });
 };
