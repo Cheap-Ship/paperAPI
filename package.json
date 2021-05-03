@@ -1,7 +1,6 @@
 {
   "name": "paperAPI",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,7 +12,18 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mysql": "^2.18.1",
-    "nodemon": "^2.0.7"
-  }
+    "mysql2": "^2.2.5",
+    "nodemon": "^2.0.7",
+    "sequelize": "^6.6.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cheap-Ship/paperAPI.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Cheap-Ship/paperAPI/issues"
+  },
+  "homepage": "https://github.com/Cheap-Ship/paperAPI#readme",
+  "description": ""
 }

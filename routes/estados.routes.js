@@ -1,6 +1,6 @@
 const express = require('express');
 let router = express.Router();
-const estadosController = require('../controllers/estados.controller.js');
+const estadoController = require('../controllers/estados.controller');
 
 // middleware for all routes related with tutorials
 router.use((req, res, next) => {
@@ -12,21 +12,10 @@ router.use((req, res, next) => {
     next()
 })
 
-router.get('/', estadosController.findAll);
+router.route('/').get(estadoController.findAll);
 
-// router.post('/', estadosController.create);
-
-// router.get('/published', estadosController.findAllPublished);
-
-// router.get('/:tutorialID', estadosController.findOne);
-
-// router.put('/:tutorialID', estadosController.update);
-
-// router.delete('/:tutorialID', estadosController.delete);
-
-//send a predefined error message for invalid routes on TUTORIALS
 router.all('*', function (req, res) {
-    res.status(404).json({ message: 'TUTORIALS: what???' });
+    res.status(404).json({ message: 'ESTADOS: what???' });
 })
 
 // EXPORT ROUTES (required by APP)
