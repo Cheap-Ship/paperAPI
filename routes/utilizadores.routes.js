@@ -1,6 +1,6 @@
 const express = require('express');
 let router = express.Router();
-const estadoController = require('../controllers/estados.controller');
+const utilizadorController = require('../controllers/utilizadores.controller');
 
 router.use((req, res, next) => {
     const start = Date.now();
@@ -11,10 +11,10 @@ router.use((req, res, next) => {
     next()
 })
 
-router.route('/').get(estadoController.findAll);
+router.route('/').get(utilizadorController.findAll);
 
 router.all('*', function (req, res) {
-    res.status(404).json({ message: 'ESTADOS: what???' });
+    res.status(404).json({ message: 'UTILIZADORES: what???' });
 })
 
 // EXPORT ROUTES (required by APP)
