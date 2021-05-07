@@ -11,7 +11,13 @@ router.use((req, res, next) => {
     next()
 })
 
-router.route('/').get(utilizadorController.findAll);
+router.route('/')
+    .get(utilizadorController.findAll)
+    .post(utilizadorController.create);
+
+router.route('/:utilizadorID')
+    .put(utilizadorController.update)
+    .delete(utilizadorController.delete);
 
 router.all('*', function (req, res) {
     res.status(404).json({ message: 'UTILIZADORES: what???' });
