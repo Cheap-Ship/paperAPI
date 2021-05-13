@@ -34,7 +34,7 @@ exports.update = (req, res) => {
     Utilizador.update(req.body, { where: { id_utilizador: req.params.utilizadorID } })
         .then(num => {
             if (num == 1) {
-                res.json({
+                res.status(200).json({
                     message: `Utilizador com id=${req.params.utilizadorID} foi atualiazdo com sucesso.`
                 });
             } else {
