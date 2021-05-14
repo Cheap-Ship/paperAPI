@@ -38,9 +38,22 @@ exports.update = (req, res) => {
                     message: `Utilizador com id=${req.params.utilizadorID} foi atualiazdo com sucesso.`
                 });
             } else {
-                res.status(404).json({
-                    message: `Utilizador com id=${req.params.utilizadorID} não foi encontrado.`
-                });
+                Utilizador.findByPk(req.params.utilizadorID)
+                    .then(data => {
+                        if (data === null)
+                            res.status(404).json({
+                                message: `Utilizador com id=${req.params.utilizadorID} não foi encontrado.`
+                            });
+                        else if (JSON.stringify(data) == JSON.stringify(req.body)) {
+                            res.status(200).json({
+                                message: `Utilizador com id=${req.params.utilizadorID} foi atualiazdo com sucesso.`
+                            });
+                        }
+                        else
+                            res.status(400).json({
+                                message: `Faltam parâmetros para editar o Utilizador com id=${req.params.utilizadorID}.`
+                            });
+                    })
             }
         })
         .catch(err => {
