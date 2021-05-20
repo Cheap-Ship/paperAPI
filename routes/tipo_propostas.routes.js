@@ -1,6 +1,6 @@
 const express = require('express');
 let router = express.Router();
-const tipo_utilizadorController = require('../controllers/tipo_utilizadores.controller');
+const tipo_propostaController = require('../controllers/tipo_propostas.controller');
 
 router.use((req, res, next) => {
     const start = Date.now();
@@ -11,10 +11,10 @@ router.use((req, res, next) => {
     next()
 })
 
-router.route('/').get(tipo_utilizadorController.findAll);
+router.route('/').get(tipo_propostaController.findAll);
 
 router.all('*', function (req, res) {
-    res.status(404).json({ message: 'TIPO_UTILIZADORES: what???' });
+    res.status(404).json({ message: 'TIPO_PROPOSTAS: what???' });
 })
 
 // EXPORT ROUTES (required by APP)
