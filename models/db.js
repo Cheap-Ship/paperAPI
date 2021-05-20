@@ -21,6 +21,8 @@ db.estado = require("./estados.model.js")(sequelize, DataTypes);
 
 db.utilizador = require("./utilizadores.model.js")(sequelize, DataTypes);
 
+db.tipo_utilizador = require("./tipo_utilizadores.model.js")(sequelize, DataTypes);
+
 //define the 1:N relationship
 // db.tutorial.hasMany(db.comment); // tutorialId is added into Comment model as FK
 // db.comment.belongsTo(db.tutorial);

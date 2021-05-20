@@ -16,6 +16,8 @@ app.use('/estados', require('./routes/estados.routes.js'))
 
 app.use('/utilizadores', require('./routes/utilizadores.routes.js'))
 
+app.use('/tipo_utilizadores', require('./routes/tipo_utilizadores.routes.js'))
+
 // handle invalid routes
 app.get('*', function (req, res) {
 res.status(404).json({ message: 'WHAT???' });
