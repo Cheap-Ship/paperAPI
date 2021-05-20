@@ -25,6 +25,8 @@ db.tipo_utilizador = require("./tipo_utilizadores.model.js")(sequelize, DataType
 
 db.tipo_proposta = require("./tipo_propostas.model.js")(sequelize, DataTypes);
 
+db.tema = require("./temas.model.js")(sequelize, DataTypes);
+
 //define the 1:N relationship
 // db.tutorial.hasMany(db.comment); // tutorialId is added into Comment model as FK
 // db.comment.belongsTo(db.tutorial);
