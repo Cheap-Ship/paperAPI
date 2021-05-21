@@ -1,53 +1,44 @@
 module.exports = (sequelize, DataTypes) => {
-    const Utilizador = sequelize.define("utilizadores", {
-        id_utilizador:{
+    const Proposta = sequelize.define("propostas", {
+        id_proposta:{
             type: DataTypes.INTEGER,
             primaryKey: true
         },
-        id_estado: {
+        motivo: {
+            type: DataTypes.STRING
+        },
+        id_criador: {
             type: DataTypes.INTEGER
         },
-        nome: {
-            type: DataTypes.STRING
-        },
-        apelido: {
-            type: DataTypes.STRING
-        },
-        correio: {
-            type: DataTypes.STRING
-        },
-        passe: {
-            type: DataTypes.STRING
+        id_docente: {
+            type: DataTypes.INTEGER
         },
         id_tipo: {
             type: DataTypes.INTEGER
         },
-        numero_estudante: {
-            type: DataTypes.INTEGER
-        },
-        cca: {
-            type: DataTypes.BOOLEAN
-        },
-        foto: {
+        titulo: {
             type: DataTypes.STRING
         },
-        cv: {
+        objetivos: {
             type: DataTypes.STRING
         },
-        portfolio: {
+        plano: {
             type: DataTypes.STRING
         },
-        facebook: {
+        resultados: {
             type: DataTypes.STRING
         },
-        instagram: {
+        perfil: {
             type: DataTypes.STRING
         },
-        github: {
+        dados: {
             type: DataTypes.STRING
         },
-        discord: {
+        recursos: {
             type: DataTypes.STRING
+        },
+        data_hora: {
+            type: DataTypes.DATE
         },
         ano_letivo: {
             type: DataTypes.STRING
@@ -55,5 +46,5 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         timestamps: false
     });
-    return Utilizador;
+    return Proposta;
 };
