@@ -1,84 +1,84 @@
 const db = require("../models/db.js");
-const Utilizador = db.utilizador;
+const Proposta = db.inscricao;
 
 exports.findAll =  (req, res) => {
-    Utilizador.findAll()
+    Proposta.findAll()
     .then(data => {
         data === null ?
-            res.status(404).json({ message: `Utilizadores não encontrados.` }) :
+            res.status(404).json({ message: `Propostas não encontradas.` }) :
             res.status(200).json(data); 
     })
     .catch(err => {
         res.status(500).json({
-            message: `Erro a obter Utilizadores: ${err.message}`
+            message: `Erro a obter Propostas: ${err.message}`
         });
     });
 };
 
 exports.create = (req, res) => {
-    Utilizador.create(req.body)
+    Proposta.create(req.body)
     .then(data => {
-        res.status(201).json({ message: "Novo Utilizador criado."});
+        res.status(201).json({ message: "Nova Proposta criada."});
     })
     .catch(err => {
         if (err.name === 'SequelizeValidationError')
             res.status(400).json({ message: err.errors[0].message });
         else
             res.status(500).json({
-                message: err.message || "Ocorreu algum erro ao criar o Utilizador."
+                message: err.message || "Ocorreu algum erro ao criar a Proposta."
             });
     });
 }
 
 exports.update = (req, res) => {
-    Utilizador.update(req.body, { where: { id_utilizador: req.params.utilizadorID } })
+    Proposta.update(req.body, { where: { id_proposta: req.params.propostaID } })
         .then(num => {
             if (num == 1) {
                 res.status(200).json({
-                    message: `Utilizador com id=${req.params.utilizadorID} foi atualizado com sucesso.`
+                    message: `Proposta com id=${req.params.propostaID} foi atualizada com sucesso.`
                 });
             } else {
-                Utilizador.findByPk(req.params.utilizadorID)
+                Proposta.findByPk(req.params.propostaID)
                     .then(data => {
                         if (data === null)
                             res.status(404).json({
-                                message: `Utilizador com id=${req.params.utilizadorID} não foi encontrado.`
+                                message: `Proposta com id=${req.params.propostaID} não foi encontrada.`
                             });
                         else if (JSON.stringify(data) == JSON.stringify(req.body)) {
                             res.status(200).json({
-                                message: `Utilizador com id=${req.params.utilizadorID} foi atualiazdo com sucesso.`
+                                message: `Proposta com id=${req.params.propostaID} foi atualiazda com sucesso.`
                             });
                         }
                         else
                             res.status(400).json({
-                                message: `Faltam parâmetros para editar o Utilizador com id=${req.params.utilizadorID}.`
+                                message: `Faltam parâmetros para editar a Proposta com id=${req.params.propostaID}.`
                             });
                     })
             }
         })
         .catch(err => {
             res.status(500).json({
-                message: err.message || `Ocorreu algum erro ao atualizar o Utilizador com id=${req.params.utilizadorID}.`
+                message: err.message || `Ocorreu algum erro ao atualizar a Proposta com id=${req.params.propostaID}.`
             });
         });
 };
 
 exports.delete = (req, res) => {
-    Utilizador.destroy({ where: { id_utilizador: req.params.utilizadorID } })
+    Proposta.destroy({ where: { id_proposta: req.params.propostaID } })
         .then(num => {
             if (num == 1) {
                 res.status(200).json({
-                    message: `Utilizador com id=${req.params.utilizadorID} foi eliminado com sucesso.`
+                    message: `Proposta com id=${req.params.propostaID} foi eliminada com sucesso.`
                 });
             } else {
                 res.status(404).json({
-                    message: `Utilizador com id=${req.params.utilizadorID} não foi encontrado.`
+                    message: `Proposta com id=${req.params.propostaID} não foi encontrada.`
                 });
             }
         })
         .catch(err => {
             res.status(500).json({
-                message: err.message || `Ocorreu algum erro ao eliminar o Utilizador com id=${req.params.utilizadorID}.`
+                message: err.message || `Ocorreu algum erro ao eliminar a Proposta com id=${req.params.propostaID}.`
             });
         });
 }
