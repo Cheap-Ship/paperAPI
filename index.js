@@ -13,14 +13,16 @@ app.get('/', function (req, res) {
 });
 
 app.use('/estados', require('./routes/estados.routes.js'))
-
 app.use('/utilizadores', require('./routes/utilizadores.routes.js'))
-
 app.use('/tipo_utilizadores', require('./routes/tipo_utilizadores.routes.js'))
-
 app.use('/tipo_propostas', require('./routes/tipo_propostas.routes.js'))
-
 app.use('/temas', require('./routes/temas.routes.js'))
+app.use('/agenda', require('./routes/agenda.routes.js'))
+app.use('/empresas', require('./routes/empresas.routes.js'))
+app.use('/estagios', require('./routes/estagios.routes.js'))
+app.use('/inscricoes', require('./routes/inscricoes.routes.js'))
+app.use('/notificacoes', require('./routes/notificacoes.routes.js'))
+app.use('/propostas', require('./routes/propostas.routes.js'))
 
 // handle invalid routes
 app.get('*', function (req, res) {
