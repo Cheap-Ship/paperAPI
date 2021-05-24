@@ -18,34 +18,15 @@ const db = {};
 db.sequelize = sequelize; //export the Sequelize instance (actual connection pool)
 
 db.estado = require("./estados.model.js")(sequelize, DataTypes);
-
 db.utilizador = require("./utilizadores.model.js")(sequelize, DataTypes);
-
 db.tipo_utilizador = require("./tipo_utilizadores.model.js")(sequelize, DataTypes);
-
 db.tipo_proposta = require("./tipo_propostas.model.js")(sequelize, DataTypes);
-
 db.tema = require("./temas.model.js")(sequelize, DataTypes);
-
 db.agenda = require("./agenda.model.js")(sequelize, DataTypes);
-
 db.empresa = require("./empresas.model.js")(sequelize, DataTypes);
-
 db.estagio = require("./estagios.model.js")(sequelize, DataTypes);
-
 db.inscricao = require("./inscricoes.model.js")(sequelize, DataTypes);
-
 db.notificacao = require("./notificacoes.model.js")(sequelize, DataTypes);
-
 db.proposta = require("./propostas.model.js")(sequelize, DataTypes);
-
-//define the 1:N relationship
-// db.tutorial.hasMany(db.comment); // tutorialId is added into Comment model as FK
-// db.comment.belongsTo(db.tutorial);
-
-// optional: SYNC with DB
-// db.sequelize.sync()
-// .then(() => { console.log('DB is successfully synchronized') })
-// .catch(e => { console.log(e) });
 
 module.exports = db;
