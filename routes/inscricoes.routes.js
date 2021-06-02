@@ -15,6 +15,9 @@ router.route('/')
     .get(inscricoesController.findAll)
     .post(inscricoesController.create);
 
+router.route('/notApproved')
+    .get(inscricoesController.findNotApproved);
+
 router.route('/:inscricaoID')
     .put(inscricoesController.update)
     .delete(inscricoesController.delete);

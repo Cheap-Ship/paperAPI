@@ -15,6 +15,12 @@ router.route('/')
     .get(utilizadorController.findAll)
     .post(utilizadorController.create);
 
+router.route('/notApproved')
+    .get(utilizadorController.findNotApproved);
+
+router.route('/approved')
+    .get(utilizadorController.findApproved);
+
 router.route('/:utilizadorID')
     .put(utilizadorController.update)
     .delete(utilizadorController.delete);

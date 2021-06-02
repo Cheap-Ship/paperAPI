@@ -15,6 +15,9 @@ router.route('/')
     .get(propostasController.findAll)
     .post(propostasController.create);
 
+router.route('/notApproved')
+    .get(propostasController.findNotApproved);
+
 router.route('/:propostaID')
     .put(propostasController.update)
     .delete(propostasController.delete);
