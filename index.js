@@ -1,13 +1,12 @@
-require('dotenv').config(); // read environment variables from .env file
+require('dotenv').config();
 const express = require('express');
-const cors = require('cors'); // middleware to enable CORS (Cross-Origin Resource Sharing)
+const cors = require('cors');
 const app = express();
-const port = process.env.PORT || 8080; // if not defined, use port 8080
-const host = process.env.HOST || '127.0.0.1'; // if not defined, localhost
-app.use(cors()); //enable ALL CORS requests (client requests from other domain)
-app.use(express.json()); //enable parsing JSON body data
+const port = process.env.PORT || 8081;
+const host = process.env.HOST || '127.0.0.1';
+app.use(cors());
+app.use(express.json());
 
-// root route -- /api/
 app.get('/', function (req, res) {
     res.status(200).json({ message: 'home -- paper api' });
 });
@@ -24,7 +23,6 @@ app.use('/inscricoes', require('./routes/inscricoes.routes.js'))
 app.use('/notificacoes', require('./routes/notificacoes.routes.js'))
 app.use('/propostas', require('./routes/propostas.routes.js'))
 
-// handle invalid routes
 app.get('*', function (req, res) {
 res.status(404).json({ message: 'WHAT???' });
 })

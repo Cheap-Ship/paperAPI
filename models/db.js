@@ -1,21 +1,19 @@
 const dbConfig = require('../config/db.config.js');
-//export classes Sequelize and Datatypes
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-host: dbConfig.HOST, dialect: dbConfig.dialect
-// pool: {
-//     max: dbConfig.pool.max, min: dbConfig.pool.min,
-//     acquire: dbConfig.pool.acquire, idle: dbConfig.pool.idle
-// }
+host: dbConfig.HOST, dialect: dbConfig.dialect,
+pool: {
+    max: dbConfig.pool.max, min: dbConfig.pool.min,
+    acquire: dbConfig.pool.acquire, idle: dbConfig.pool.idle
+}
 });
 
-//optional, test the connection
 sequelize.authenticate()
 .then(() => { console.log('Connection has been established successfully.'); })
 .catch(err => { console.error('Unable to connect to the database:', err); });
 
 const db = {};
-db.sequelize = sequelize; //export the Sequelize instance (actual connection pool)
+db.sequelize = sequelize;
 
 db.estado = require("./estados.model.js")(sequelize, DataTypes);
 db.utilizador = require("./utilizadores.model.js")(sequelize, DataTypes);
