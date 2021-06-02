@@ -1,6 +1,7 @@
 const express = require('express');
 let router = express.Router();
 const utilizadorController = require('../controllers/utilizadores.controller');
+const authController = require("../controllers/auth.controller");
 
 router.use((req, res, next) => {
     const start = Date.now();
@@ -12,18 +13,21 @@ router.use((req, res, next) => {
 })
 
 router.route('/')
-    .get(utilizadorController.findAll)
-    .post(utilizadorController.create);
+    .get(authController.verifyToken, utilizadorController.findAll)
+    .post(authController.signup);
+
+router.route('/signin')
+    .post(authController.signin);
 
 router.route('/notApproved')
-    .get(utilizadorController.findNotApproved);
+    .get(authController.verifyToken, utilizadorController.findNotApproved);
 
 router.route('/approved')
-    .get(utilizadorController.findApproved);
+    .get(authController.verifyToken, utilizadorController.findApproved);
 
 router.route('/:utilizadorID')
-    .put(utilizadorController.update)
-    .delete(utilizadorController.delete);
+    .put(authController.verifyToken, utilizadorController.update)
+    .delete(authController.verifyToken, utilizadorController.delete);
 
 router.all('*', function (req, res) {
     res.status(404).json({ message: 'UTILIZADORES: what???' });

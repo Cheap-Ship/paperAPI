@@ -1,6 +1,7 @@
 const express = require('express');
 let router = express.Router();
 const temaController = require('../controllers/temas.controller');
+const authController = require("../controllers/auth.controller");
 
 router.use((req, res, next) => {
     const start = Date.now();
@@ -11,7 +12,8 @@ router.use((req, res, next) => {
     next()
 })
 
-router.route('/').get(temaController.findAll);
+router.route('/')
+    .get(authController.verifyToken, temaController.findAll);
 
 router.all('*', function (req, res) {
     res.status(404).json({ message: 'TEMAS: what???' });

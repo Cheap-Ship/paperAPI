@@ -1,6 +1,7 @@
 const express = require('express');
 let router = express.Router();
 const tipo_propostaController = require('../controllers/tipo_propostas.controller');
+const authController = require("../controllers/auth.controller");
 
 router.use((req, res, next) => {
     const start = Date.now();
@@ -11,7 +12,8 @@ router.use((req, res, next) => {
     next()
 })
 
-router.route('/').get(tipo_propostaController.findAll);
+router.route('/')
+    .get(authController.verifyToken, tipo_propostaController.findAll);
 
 router.all('*', function (req, res) {
     res.status(404).json({ message: 'TIPO_PROPOSTAS: what???' });

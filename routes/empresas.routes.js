@@ -1,6 +1,7 @@
 const express = require('express');
 let router = express.Router();
 const empresasController = require('../controllers/empresas.controller');
+const authController = require("../controllers/auth.controller");
 
 router.use((req, res, next) => {
     const start = Date.now();
@@ -12,8 +13,8 @@ router.use((req, res, next) => {
 })
 
 router.route('/')
-    .get(empresasController.findAll)
-    .post(empresasController.create);
+    .get(authController.verifyToken, empresasController.findAll)
+    .post(authController.verifyToken, empresasController.create);
 
 router.all('*', function (req, res) {
     res.status(404).json({ message: 'EMPRESAS: what???' });

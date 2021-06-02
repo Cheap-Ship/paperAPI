@@ -1,6 +1,7 @@
 const express = require('express');
 let router = express.Router();
 const propostasController = require('../controllers/propostas.controller');
+const authController = require("../controllers/auth.controller");
 
 router.use((req, res, next) => {
     const start = Date.now();
@@ -12,15 +13,15 @@ router.use((req, res, next) => {
 })
 
 router.route('/')
-    .get(propostasController.findAll)
-    .post(propostasController.create);
+    .get(authController.verifyToken, propostasController.findAll)
+    .post(authController.verifyToken, propostasController.create);
 
 router.route('/notApproved')
-    .get(propostasController.findNotApproved);
+    .get(authController.verifyToken, propostasController.findNotApproved);
 
 router.route('/:propostaID')
-    .put(propostasController.update)
-    .delete(propostasController.delete);
+    .put(authController.verifyToken, propostasController.update)
+    .delete(authController.verifyToken, propostasController.delete);
 
 router.all('*', function (req, res) {
     res.status(404).json({ message: 'PROPOSTAS: what???' });

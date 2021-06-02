@@ -1,6 +1,7 @@
 const express = require('express');
 let router = express.Router();
 const agendaController = require('../controllers/agenda.controller');
+const authController = require("../controllers/auth.controller");
 
 router.use((req, res, next) => {
     const start = Date.now();
@@ -12,7 +13,7 @@ router.use((req, res, next) => {
 })
 
 router.route('/')
-    .get(agendaController.findAll);
+    .get(authController.verifyToken, agendaController.findAll);
 
 router.all('*', function (req, res) {
     res.status(404).json({ message: 'AGENDA: what???' });

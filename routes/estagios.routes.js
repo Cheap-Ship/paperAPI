@@ -1,6 +1,7 @@
 const express = require('express');
 let router = express.Router();
 const estagiosController = require('../controllers/estagios.controller');
+const authController = require("../controllers/auth.controller");
 
 router.use((req, res, next) => {
     const start = Date.now();
@@ -12,8 +13,8 @@ router.use((req, res, next) => {
 })
 
 router.route('/')
-    .get(estagiosController.findAll)
-    .post(estagiosController.create);
+    .get(authController.verifyToken, estagiosController.findAll)
+    .post(authController.verifyToken, estagiosController.create);
 
 router.all('*', function (req, res) {
     res.status(404).json({ message: 'ESTÁGIOS: what???' });

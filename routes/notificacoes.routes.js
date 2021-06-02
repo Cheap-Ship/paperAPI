@@ -1,6 +1,7 @@
 const express = require('express');
 let router = express.Router();
 const notifacacoesController = require('../controllers/notificacoes.controller');
+const authController = require("../controllers/auth.controller");
 
 router.use((req, res, next) => {
     const start = Date.now();
@@ -12,8 +13,8 @@ router.use((req, res, next) => {
 })
 
 router.route('/')
-    .get(notifacacoesController.findAll)
-    .post(notifacacoesController.create);
+    .get(authController.verifyToken, notifacacoesController.findAll)
+    .post(authController.verifyToken, notifacacoesController.create);
 
 router.all('*', function (req, res) {
     res.status(404).json({ message: 'NOTIFICAÇÕES: what???' });
