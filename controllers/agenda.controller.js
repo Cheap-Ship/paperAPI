@@ -14,3 +14,18 @@ exports.findAll =  (req, res) => {
         });
     });
 };
+
+exports.create = (req, res) => {
+    Agenda.create(req.body)
+    .then(data => {
+        res.status(201).json({ message: "Nova Entrevista criada."});
+    })
+    .catch(err => {
+        if (err.name === 'SequelizeValidationError')
+            res.status(400).json({ message: err.errors[0].message });
+        else
+            res.status(500).json({
+                message: err.message || "Ocorreu algum erro ao criar a Entrevista."
+            });
+    });
+}
