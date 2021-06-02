@@ -16,21 +16,6 @@ exports.findAll = (req, res) => {
         });
 };
 
-exports.create = (req, res) => {
-    Utilizador.create(req.body)
-        .then(data => {
-            res.status(201).json({ message: "Novo Utilizador criado." });
-        })
-        .catch(err => {
-            if (err.name === 'SequelizeValidationError')
-                res.status(400).json({ message: err.errors[0].message });
-            else
-                res.status(500).json({
-                    message: err.message || "Ocorreu algum erro ao criar o Utilizador."
-                });
-        });
-}
-
 exports.update = (req, res) => {
     Utilizador.update(req.body, { where: { id_utilizador: req.params.utilizadorID } })
         .then(num => {

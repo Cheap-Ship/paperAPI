@@ -19,6 +19,9 @@ router.route('/')
 router.route('/signin')
     .post(authController.signin);
 
+router.route('/verify')
+    .get(authController.verifyToken, authController.verifySession);
+
 router.route('/notApproved')
     .get(authController.verifyToken, utilizadorController.findNotApproved);
 

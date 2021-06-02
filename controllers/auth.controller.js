@@ -33,10 +33,10 @@ exports.signin = async (req, res) => {
         const passwordIsValid = bcrypt.compareSync(req.body.passe, user.passe);
         if (!passwordIsValid) return res.status(401).json({ accessToken: null, message: "Password inválida." });
         const token = jwt.sign({ id: user.id }, config.secret, {
-            expiresIn: req.body.stayLogged ? 60 * 60 * 24 * 30 : 60 * 60 * 24
+            expiresIn: req.body.manter_conectado ? 60 * 60 * 24 * 30 : 60 * 60 * 24
         });
         return res.status(200).json({
-            id_estado: user.id_estado, nome: user.nome, apelido: user.apelido, correio: user.correio,
+            id_utilizador: user.id_utilizador, id_estado: user.id_estado, nome: user.nome, apelido: user.apelido, correio: user.correio,
             passe: user.passe, id_tipo: user.id_tipo, numero_estudante: user.numero_estudante,
             nome_empresa: user.nome_empresa, cca: user.cca, foto: user.foto, inscricao: user.inscricao,
             cv: user.cv, portfolio: user.portfolio, facebook: user.facebook, instagram: user.instagram,
@@ -61,3 +61,11 @@ exports.verifyToken = (req, res, next) => {
     });
 };
 
+exports.verifySession = async (req, res) => {
+    try {
+        res.status(200).json({ message: "Sessão Válida." });
+    }
+    catch (err) {
+        res.status(500).json({ message: err.message });
+    };
+};
