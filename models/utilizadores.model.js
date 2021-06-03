@@ -28,6 +28,9 @@ module.exports = (sequelize, DataTypes) => {
         cca: {
             type: DataTypes.BOOLEAN
         },
+        nome_empresa: {
+            type: DataTypes.INTEGER
+        },
         foto: {
             type: DataTypes.STRING
         },

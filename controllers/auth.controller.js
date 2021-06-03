@@ -36,11 +36,11 @@ exports.signin = async (req, res) => {
             expiresIn: req.body.manter_conectado ? 60 * 60 * 24 * 30 : 60 * 60 * 24
         });
         return res.status(200).json({
-            id_utilizador: user.id_utilizador, id_estado: user.id_estado, nome: user.nome, apelido: user.apelido, correio: user.correio,
-            passe: user.passe, id_tipo: user.id_tipo, numero_estudante: user.numero_estudante,
-            nome_empresa: user.nome_empresa, cca: user.cca, foto: user.foto, inscricao: user.inscricao,
-            cv: user.cv, portfolio: user.portfolio, facebook: user.facebook, instagram: user.instagram,
-            github: user.github, discord: user.discord, ano: user.ano, accessToken: token
+            id_utilizador: user.id_utilizador, id_estado: user.id_estado, nome: user.nome, apelido: user.apelido,
+            correio: user.correio, passe: user.passe, id_tipo: user.id_tipo, numero_estudante: user.numero_estudante,
+            nome_empresa: user.nome_empresa, cca: user.cca, foto: user.foto, cv: user.cv, portfolio: user.portfolio,
+            facebook: user.facebook, instagram: user.instagram, github: user.github, discord: user.discord,
+            ano: user.ano, accessToken: token
         });
     } catch (err) {
         res.status(500).json({ message: err.message });
