@@ -14,7 +14,7 @@ router.use((req, res, next) => {
 
 router.route('/')
     .get(authController.verifyToken, empresasController.findAll)
-    .post(authController.verifyToken, empresasController.create);
+    .post(empresasController.create);
 
 router.all('*', function (req, res) {
     res.status(404).json({ message: 'EMPRESAS: what???' });
