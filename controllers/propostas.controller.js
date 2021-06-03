@@ -1,6 +1,6 @@
 const db = require("../models/db.js");
 const { Op } = require("sequelize");
-const Proposta = db.inscricao;
+const Proposta = db.proposta;
 
 exports.findAll = (req, res) => {
     Proposta.findAll()
