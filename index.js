@@ -22,6 +22,7 @@ app.use('/estagios', require('./routes/estagios.routes.js'))
 app.use('/inscricoes', require('./routes/inscricoes.routes.js'))
 app.use('/notificacoes', require('./routes/notificacoes.routes.js'))
 app.use('/propostas', require('./routes/propostas.routes.js'))
+app.use('/auth', require('./routes/auth.routes.js'))
 
 app.get('*', function (req, res) {
 res.status(404).json({ message: 'WHAT???' });
