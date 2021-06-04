@@ -13,7 +13,7 @@ router.use((req, res, next) => {
 })
 
 router.route('/')
-    .get(authController.verifyToken, tipo_utilizadorController.findAll);
+    .get(tipo_utilizadorController.findAll);
 
 router.all('*', function (req, res) {
     res.status(404).json({ message: 'TIPO_UTILIZADORES: what???' });
