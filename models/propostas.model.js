@@ -4,6 +4,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             primaryKey: true
         },
+        id_estado: {
+            type: DataTypes.INTEGER
+        },
         motivo: {
             type: DataTypes.STRING
         },
