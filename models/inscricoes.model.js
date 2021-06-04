@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         id_estado:{
             type: DataTypes.INTEGER
         },
-        preferancia:{
+        preferencia:{
             type: DataTypes.INTEGER
         },
         ano_letivo: {
