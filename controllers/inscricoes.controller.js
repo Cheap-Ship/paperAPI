@@ -32,7 +32,7 @@ exports.create = (req, res) => {
 }
 
 exports.update = (req, res) => {
-    Inscricao.update(req.body, { where: { id_incricao: req.params.inscricaoID } })
+    Inscricao.update(req.body, { where: { id_inscricao: req.params.inscricaoID } })
         .then(num => {
             if (num == 1) {
                 res.status(200).json({
@@ -65,7 +65,7 @@ exports.update = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-    Inscricao.destroy({ where: { id_incricao: req.params.inscricaoID } })
+    Inscricao.destroy({ where: { id_inscricao: req.params.inscricaoID } })
         .then(num => {
             if (num == 1) {
                 res.status(200).json({
