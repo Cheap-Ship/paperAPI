@@ -19,7 +19,7 @@ exports.signup = async (req, res) => {
         req.body.passe = bcrypt.hashSync(req.body.passe, 8);
         console.log(req.body.passe)
         user = await User.create(req.body);
-        return res.status(201).json({ message: "Novo Utilizador criado." });
+        return res.status(201).json({ message: "Novo Utilizador criado.", location: data.id_utilizador });
     }
     catch (err) {
         res.status(500).json({ message: err.message });
@@ -68,4 +68,18 @@ exports.verifySession = async (req, res) => {
     catch (err) {
         res.status(500).json({ message: err.message });
     };
+};
+
+exports.isDocente = async (req, res, next) => {
+    let user = await User.findByPk(req.loggedUserId);
+    if (user.id_tipo === 1)
+        next();
+    return res.status(403).send({ message: "Acesso Negado." });
+};
+
+exports.isAdminOrLoggedUser = async (req, res, next) => {
+    let user = await User.findByPk(req.loggedUserId);
+    if (user.id_tipo === 1 || user.id_utilizador == req.params.userID)
+        next();
+    return res.status(403).send({ message: "Acesso Negado." });
 };
