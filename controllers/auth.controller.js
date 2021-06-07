@@ -13,11 +13,12 @@ exports.signup = async (req, res) => {
                 { numero_estudante: { [Op.and]: [req.body.numero_estudante, { [Op.not]: { [Op.is]: null } }] } }]
             }
         });
+        console.log(user)
         if (user)
             return res.status(400).json({ message: "Email ou número de estudante já estão em uso." });
         req.body.passe = bcrypt.hashSync(req.body.passe, 8);
         user = await User.create(req.body);
-        return res.status(201).json({ message: "Novo Utilizador criado.", location: data.id_utilizador });
+        return res.status(201).json({ message: "Novo Utilizador criado.", location: user.id_utilizador });
     }
     catch (err) {
         res.status(500).json({ message: err.message });
