@@ -21,10 +21,7 @@ exports.create = async (req, res) => {
     if (!agenda) {
         Agenda.create(req.body)
             .then(data => {
-                res.status(201).json({
-                    message: "Nova Entrevista criada.",
-                    location: { id_utilizador: data.id_utilizador, id_convidado: data.id_convidado }
-                });
+                res.status(201).json({ message: "Nova Entrevista criada." });
             })
             .catch(err => {
                 if (err.name === 'SequelizeValidationError')
