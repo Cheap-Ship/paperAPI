@@ -37,10 +37,7 @@ exports.create = async (req, res) => {
     } else {
         Agenda.update({ data_hora: req.body.data_hora }, { where: { [Op.and]: [{ id_utilizador: req.body.id_utilizador }, { id_convidado: req.body.id_convidado }] } })
             .then(num => {
-                res.status(200).json({
-                    message: "Nova Entrevista criada.",
-                    location: { id_utilizador: req.body.id_utilizador, id_convidado: req.body.id_convidado }
-                });
+                res.status(200).json({ message: "Nova Entrevista criada." });
             })
             .catch(err => {
                 if (err.name === 'SequelizeValidationError')

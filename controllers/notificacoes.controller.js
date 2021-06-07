@@ -18,7 +18,7 @@ exports.findAll = (req, res) => {
 exports.create = (req, res) => {
     Notificacao.create(req.body)
         .then(data => {
-            res.status(201).json({ message: "Nova Notificação criada.", location: data.id_notificacao });
+            res.status(201).json({ message: "Nova Notificação criada.", location: data.null });
         })
         .catch(err => {
             if (err.name === 'SequelizeValidationError')

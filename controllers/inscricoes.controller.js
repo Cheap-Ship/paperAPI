@@ -19,7 +19,7 @@ exports.findAll = (req, res) => {
 exports.create = (req, res) => {
     Inscricao.create(req.body)
         .then(data => {
-            res.status(201).json({ message: "Nova Inscrição criada.", location: data.id_inscricao });
+            res.status(201).json({ message: "Nova Inscrição criada.", location: data.null });
         })
         .catch(err => {
             if (err.name === 'SequelizeValidationError')
