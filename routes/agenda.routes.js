@@ -13,7 +13,8 @@ router.use((req, res, next) => {
 })
 
 router.route('/')
-    .get(authController.verifyToken, agendaController.findAll);
+    .get(authController.verifyToken, agendaController.findAll)
+    .post(authController.verifyToken, agendaController.create);
 
 router.all('*', function (req, res) {
     res.status(404).json({ message: 'AGENDA: what???' });

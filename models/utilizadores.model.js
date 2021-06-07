@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING
         },
         correio: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            validate: { isEmail: true }
         },
         passe: {
             type: DataTypes.STRING

@@ -8,12 +8,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             primaryKey: true
         },
-        data: {
-            type: DataTypes.DATEONLY,
-            primaryKey: true
-        },
-        hora: {
-            type: DataTypes.TIME
+        data_hora: {
+            type: DataTypes.DATE
         },
         detalhes: {
             type: DataTypes.STRING

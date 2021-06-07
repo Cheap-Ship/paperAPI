@@ -15,9 +15,7 @@ exports.signup = async (req, res) => {
         });
         if (user)
             return res.status(400).json({ message: "Email ou número de estudante já estão em uso." });
-        console.log(req.body.passe)
         req.body.passe = bcrypt.hashSync(req.body.passe, 8);
-        console.log(req.body.passe)
         user = await User.create(req.body);
         return res.status(201).json({ message: "Novo Utilizador criado.", location: data.id_utilizador });
     }
@@ -32,7 +30,7 @@ exports.signin = async (req, res) => {
         if (!user) return res.status(404).json({ message: "Utilizador não encontrado." });
         const passwordIsValid = bcrypt.compareSync(req.body.passe, user.passe);
         if (!passwordIsValid) return res.status(401).json({ accessToken: null, message: "Password inválida." });
-        const token = jwt.sign({ id: user.id }, config.secret, {
+        const token = jwt.sign({ id: user.id_utilizador }, config.secret, {
             expiresIn: req.body.manter_conectado ? 60 * 60 * 24 * 30 : 60 * 60 * 24
         });
         return res.status(200).json({
@@ -79,7 +77,8 @@ exports.isDocente = async (req, res, next) => {
 
 exports.isAdminOrLoggedUser = async (req, res, next) => {
     let user = await User.findByPk(req.loggedUserId);
-    if (user.id_tipo === 1 || user.id_utilizador == req.params.userID)
+    if (user.cca || user.id_utilizador == req.loggedUserId)
         next();
-    return res.status(403).send({ message: "Acesso Negado." });
+    else
+        return res.status(403).send({ message: "Acesso Negado." });
 };

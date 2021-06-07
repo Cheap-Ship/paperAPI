@@ -25,6 +25,9 @@ router.route('/:utilizadorID')
     .put(authController.verifyToken, utilizadorController.update)
     .delete(authController.verifyToken, utilizadorController.delete);
 
+router.route('/:utilizadorID/password')
+    .put(authController.verifyToken, authController.isAdminOrLoggedUser, utilizadorController.updatePasse)
+
 router.all('*', function (req, res) {
     res.status(404).json({ message: 'UTILIZADORES: what???' });
 })

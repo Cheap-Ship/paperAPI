@@ -1,6 +1,16 @@
 const db = require("../models/db.js");
+const bcrypt = require("bcryptjs");
 const { Op } = require("sequelize");
 const Utilizador = db.utilizador;
+
+const getUpdateError = (data, id, body) => {
+    if (data === null)
+        return { status: 404, message: `Utilizador com id=${id} não foi encontrado.` }
+    else if (JSON.stringify(data) == JSON.stringify(body))
+        return { status: 200, message: `Utilizador com id=${id} foi atualiazdo com sucesso.` }
+    else
+        return { status: 400, message: `Faltam parâmetros para editar o Utilizador com id=${id}.` }
+}
 
 exports.findAll = (req, res) => {
     Utilizador.findAll()
@@ -26,19 +36,8 @@ exports.update = (req, res) => {
             } else {
                 Utilizador.findByPk(req.params.utilizadorID)
                     .then(data => {
-                        if (data === null)
-                            res.status(404).json({
-                                message: `Utilizador com id=${req.params.utilizadorID} não foi encontrado.`
-                            });
-                        else if (JSON.stringify(data) == JSON.stringify(req.body)) {
-                            res.status(200).json({
-                                message: `Utilizador com id=${req.params.utilizadorID} foi atualiazdo com sucesso.`
-                            });
-                        }
-                        else
-                            res.status(400).json({
-                                message: `Faltam parâmetros para editar o Utilizador com id=${req.params.utilizadorID}.`
-                            });
+                        const { status, message } = getUpdateError(data, req.params.utilizadorID, req.body)
+                        res.status(status).json({ message: message })
                     })
             }
         })
@@ -93,6 +92,30 @@ exports.findApproved = (req, res) => {
         .catch(err => {
             res.status(500).json({
                 message: `Erro a obter Utilizadores: ${err.message}`
+            });
+        });
+};
+
+exports.updatePasse = (req, res) => {
+    Utilizador.update(
+        { passe: bcrypt.hashSync(req.body.passe.toString(), 8) },
+        { where: { id_utilizador: req.params.utilizadorID } })
+        .then(num => {
+            if (num == 1) {
+                return res.status(200).json({
+                    message: `Utilizador com id=${req.params.utilizadorID} foi atualizado com sucesso.`
+                });
+            } else {
+                Utilizador.findByPk(req.params.utilizadorID)
+                    .then(data => {
+                        const { status, message } = getUpdateError(data, req.params.utilizadorID, req.body.passe)
+                        return res.status(status).json({ message: message })
+                    })
+            }
+        })
+        .catch(err => {
+            return res.status(500).json({
+                message: err.message || `Ocorreu algum erro ao atualizar o Utilizador com id=${req.params.utilizadorID}.`
             });
         });
 };
