@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 8081;
-const host = process.env.HOST || '127.0.0.1';
+
 app.use(cors());
 app.use(express.json());
 
@@ -27,4 +27,4 @@ app.use('/auth', require('./routes/auth.routes.js'))
 app.get('*', function (req, res) {
 res.status(404).json({ message: 'WHAT???' });
 })
-app.listen(port, host, () => console.log(`App listening at http://${host}:${port}/`));
+app.listen(port, () => console.log(`App listening on PORT ${port}/`));
