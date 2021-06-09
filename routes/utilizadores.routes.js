@@ -25,8 +25,17 @@ router.route('/:utilizadorID')
     .put(authController.verifyToken, utilizadorController.update)
     .delete(authController.verifyToken, utilizadorController.delete);
 
-router.route('/:utilizadorID/password')
-    .put(authController.verifyToken, authController.isAdminOrLoggedUser, utilizadorController.updatePasse)
+router.route('/:utilizadorID/passe')
+    .put(authController.verifyToken, authController.isCCAOrLoggedUser, utilizadorController.updatePasse);
+
+router.route('/:utilizadorID/links')
+    .put(authController.verifyToken, authController.isCCAOrLoggedUser, utilizadorController.updateLinks);
+
+router.route('/:utilizadorID/estado')
+    .put(authController.verifyToken, authController.isCCA, utilizadorController.updateEstado);
+
+router.route('/:utilizadorID/cca')
+    .put(authController.verifyToken, authController.isCCA, utilizadorController.updateCCA);
 
 router.all('*', function (req, res) {
     res.status(404).json({ message: 'UTILIZADORES: what???' });

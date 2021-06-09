@@ -69,16 +69,17 @@ exports.verifySession = async (req, res) => {
     };
 };
 
-exports.isDocente = async (req, res, next) => {
+exports.isCCA = async (req, res, next) => {
     let user = await User.findByPk(req.loggedUserId);
-    if (user.id_tipo === 1)
+    if (user.cca)
         next();
-    return res.status(403).send({ message: "Acesso Negado." });
+    else
+        return res.status(403).send({ message: "Acesso Negado." });
 };
 
-exports.isAdminOrLoggedUser = async (req, res, next) => {
+exports.isCCAOrLoggedUser = async (req, res, next) => {
     let user = await User.findByPk(req.loggedUserId);
-    if (user.cca || user.id_utilizador == req.loggedUserId)
+    if (user.cca || user.id_utilizador == req.params.utilizadorID)
         next();
     else
         return res.status(403).send({ message: "Acesso Negado." });
